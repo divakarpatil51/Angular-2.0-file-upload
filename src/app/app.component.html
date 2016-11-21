@@ -1,3 +1,22 @@
-<h1>
+
+
+<div>
+  <h1>
   {{title}}
-</h1>
+</h1>  
+  <label class="btn btn-primary ">
+    Upload Photos <input type="file" accept="image/*"  (change)="uploadPhotos(photo)" #photo style="display: none;">
+</label> {{photos_file_src}}
+
+  <div *ngIf="photos_file_src">
+    <img [src]="sanitize(photos_file_src)" alt="test" style="height:100px; width: 100px">
+  </div>
+
+
+  <label class="btn btn-primary ">
+    Upload Videos<input type="file" accept="video/*"  (change)="uploadVideos(video)" #video style="display: none;">
+</label>{{videos_file_src}}
+  <video *ngIf="videos_file_src" src="videos_file_src"controls="controls">
+    <!--<source  type="video/mp4"> Your browser does not support the video tag.-->
+  </video>
+</div>
