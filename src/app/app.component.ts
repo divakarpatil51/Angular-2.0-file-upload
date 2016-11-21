@@ -17,17 +17,13 @@ export class AppComponent {
         private videoService: VideoService) { }
 
     uploadPhotos(input) {
-        // this.videoService.getTitle()
-        //     .then(data => {
-        //         console.log(data);
-        //         this.photos_file_src = window.URL.createObjectURL(input.files[0]);
-        //     });
+//      this.photos_file_src = window.URL.createObjectURL(input.files[0]);
         let formData: any = new FormData();
         formData.append('uploads', input.files[0], input.files[0].name);
         this.videoService.uploadPhoto(formData)
             .then(response => {
-                console.log('Photo response: ', response);
-                this.photos_file_src = window.URL.createObjectURL(input.files[0]);
+                console.log('Photo response: ', response.path);
+                this.photos_file_src = '../assets/' + response.filename;
             });
     }
 
@@ -37,12 +33,12 @@ export class AppComponent {
         this.videoService.uploadPhoto(formData)
             .then(response => {
                 console.log(response.originalname);
-                this.videos_file_src = response.path;
+                this.videos_file_src = '../assets/' + response.filename;
             });
-        //  = window.URL.createObjectURL(input.files[0]);
     }
 
-    sanitize(url: string) {
-        return this.sanitizer.bypassSecurityTrustUrl(url);
-    }
+    /*Sanitizes the Image URL for the images which are uploaded from users local folder*/
+    // sanitize(url: string) {
+    //     return this.sanitizer.bypassSecurityTrustUrl(url);
+    // }
 }
